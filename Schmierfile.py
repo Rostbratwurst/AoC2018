@@ -15,10 +15,15 @@ if counter_counter[2]==2:
 # for i,v in meinmix.iteritems():
 #     print(i,v)
 
-d=difflib.Differ()
-diff=d.compare(theString1,theString2)
-u=difflib.get_close_matches('qv',stinglist,1,0)
+# d=difflib.Differ()
+# diff=d.compare(theString1,theString2)
+# u=difflib.get_close_matches('qv',stinglist,1,0)
 
-print(stinglist)
-print(u)
+# print(stinglist)
+# print(u)
 # print('\n'.join(diff))
+
+
+print (theString.rpartition('buno')[2])
+
+#[int(s) for s in str.split() if s.isdigit()]
