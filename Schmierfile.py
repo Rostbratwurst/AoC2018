@@ -24,6 +24,11 @@ if counter_counter[2]==2:
 # print('\n'.join(diff))
 
 
-print (theString.rpartition('buno')[2])
+# print (theString.rpartition('buno')[2])
 
-#[int(s) for s in str.split() if s.isdigit()]
+#[int(s) for s in str.split() if s.isdigit()]#
+
+test1=[1,2,3]
+test2=[7,8,9]
+for i,j in itertools(test1,test2)):
+    print (i,j)

@@ -1,5 +1,6 @@
 from Day2 import getPuzzleinput
 import itertools
+import numpy as np
 
 def parseInput(string):
     Numberlist=[]
@@ -10,12 +11,15 @@ def parseInput(string):
     return Numberlist
 
 def overlay(proned):
-    for pro1, pro2 in itertools.combinations(proned, 2):
-        max(pro1[0],pro2[0])-min(pro1[0],pro2[0])
+    fabric=np.zeros((1000,1000))
+    for id in proned:
+        for x,y in zip()
 
+
+    return fabric
 
 if __name__=="__main__":
 
     ids=getPuzzleinput(3)
     proned=parseInput(ids)
-    overlay(proned)
+    whaaat=overlay(proned)
