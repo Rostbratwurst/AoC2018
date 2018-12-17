@@ -1,4 +1,6 @@
 from collections import Counter
+import numpy as np
+import itertools as it
 import difflib
 theString = 'zihrtxgmwcfpbunoleydukjmqv'
 theString2 = ['zihrtxgmwcfpbunoleydukjmqk']
@@ -28,7 +30,15 @@ if counter_counter[2]==2:
 
 #[int(s) for s in str.split() if s.isdigit()]#
 
-test1=[1,2,3]
-test2=[7,8,9]
-for i,j in itertools(test1,test2)):
-    print (i,j)
+# test1=[1,2,3]
+# test2=[7,8,9]
+# for i,j in itertools(test1,test2)):
+#     print (i,j)
+
+
+X = np.zeros((100, 200, 300))
+print(X.shape[0])
+
+
+for i,s in it.product(range(30, 52), range(1, 18)):
+    print(i,s)
