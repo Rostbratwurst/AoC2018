@@ -26,11 +26,17 @@ def overlay(proned):
 def checksingelclaim(fabric,proned):
     for id in proned:
         for i,s in itertools.product(range(id[0]-1,id[0]+id[2]-1),range(id[1]-1,id[1]+id[3]-1)):
-            if fabric[i][s]==1:
-                continue
-            else:
+
+            if fabric[i][s]!=1:
+                check=0
                 break
-        singelID=id
+            else:
+                check=1
+                continue
+
+        if check==1:
+            singelID=id
+            break
 
     return singelID
 
