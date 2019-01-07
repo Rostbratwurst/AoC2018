@@ -12,6 +12,7 @@ def customiter(input):
     while True:
         try:
             yield input[n],input[n+1]
+
         except IndexError:
             return
         n+=1
@@ -25,22 +26,22 @@ def sumsleeptime(input):
             if activeGuard not in Guards:
                 Guards.update({activeGuard:0})
         elif 'falls' in stamp:
-            Guards[activeGuard]+=(int(stampon[15:16])-int(stamp[15:16]))
+            Guards[activeGuard]+=(int(stampon[15:17])-int(stamp[15:17]))
         else:
             pass
     return Guards,max(Guards, key=lambda k: Guards[k])
 
-def mostminute(input):
+def mostminute(sleepmaster):
+
     minutes=np.zeros(60)
     active=0
     for stamp, stampon in customiter(ids):
-        if str(input) in stamp:
+        if str(sleepmaster) in stamp:
             active=1
         elif 'falls' in stamp and active==1:
-           for i in range(int(stamp[15:16]),int(stampon[15:16])):
+           for i in range(int(stamp[15:17]),int(stampon[15:17])):
                minutes[i]+=1
         elif 'wakes' in stamp and active==1:
-            active=1
             continue
         else:
             active=0
@@ -54,3 +55,10 @@ if __name__=="__main__":
     Numbergurads,sleepmaster=sumsleeptime(ids)
     sleepsum=mostminute(sleepmaster)
     result=sleepmaster*np.argmax(sleepsum)
+    Guradminutes = [{i:(np.where(mostminute(i)==np.max(mostminute(i))),np.max(mostminute(i)))} for i,k in Numbergurads.items()]
+    # for i,k in Numbergurads.items():
+    #     mostminute(i)
+    #     Guard
+
+
+

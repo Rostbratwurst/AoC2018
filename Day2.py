@@ -2,30 +2,48 @@ from selenium import webdriver
 from collections import Counter
 import itertools
 import math
+import os.path
 
 def getPuzzleinput(day):
 
-    driver = webdriver.Chrome()
-    driver.get('https://adventofcode.com/2018/day/'+str(day))
-    # url="https://adventofcode.com/"
-    # webbrowser.open(url,new=2)
+    if os.path.isfile("input_Day"+str(day)+'.txt'):
+        input = []
+        file = open("input_Day" + str(day)+'.txt', 'r')
+        for i in file:
+            i=i.strip()
+            input.append(i)
+        file.close()
+        return input
 
-    elem1 = driver.find_element_by_link_text('[GitHub]')
-    elem1.click()
+    else:
 
-    driver.find_element_by_id('login_field').send_keys('Rostbratwurst')
-    driver.find_element_by_id('password').send_keys('Puller100')
-    driver.find_element_by_name('commit').click()
+        driver = webdriver.Chrome()
+        driver.get('https://adventofcode.com/2018/day/'+str(day))
+        # url="https://adventofcode.com/"
+        # webbrowser.open(url,new=2)
 
-    elem1 = driver.find_element_by_link_text('get your puzzle input')
-    elem1.click()
+        elem1 = driver.find_element_by_link_text('[GitHub]')
+        elem1.click()
 
-    driver.switch_to.window(driver.window_handles[1])
-    inp = driver.find_element_by_tag_name("body")
-    dayInput=inp.text.split('\n')
-    print(dayInput)
-    driver.quit()
-    return dayInput
+        driver.find_element_by_id('login_field').send_keys('Rostbratwurst')
+        driver.find_element_by_id('password').send_keys('Puller100')
+        driver.find_element_by_name('commit').click()
+
+        elem1 = driver.find_element_by_link_text('get your puzzle input')
+        elem1.click()
+
+        driver.switch_to.window(driver.window_handles[1])
+        inp = driver.find_element_by_tag_name("body")
+        dayInput=inp.text
+        driver.quit()
+
+        with open('input_day'+str(day)+'.txt', 'w') as f:
+            for line in dayInput:
+                f.write(str(line))
+                # f.write("\n")
+        f.close()
+        print(dayInput)
+        return [i for i in dayInput.split("\n")]
 
 def lettercount(list_of_strings):
 
@@ -63,9 +81,6 @@ def similarity(list):
             print(st1)
             print(st2)
             print(diffletter)
-
-
-
 
 
 if __name__=="__main__":
