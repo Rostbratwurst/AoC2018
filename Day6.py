@@ -2,15 +2,11 @@ from Day2 import getPuzzleinput
 import numpy as np
 
 def borders(coordinates):
-    x=[]
-    y=[]
-    coordinates={l:(int(i),int(v)) for l in}
-    for l in coordinates:
-        i,v = l.split(', ')
-        x.append(int(i))
-        y.append(int(v))
-        coordinates[l]={L:(int(i),int(v))}
-    return max(x),max(y)
+
+    points={coordinates.index(l):(int(i),int(v)) for l in coordinates for i in l.split(', ')[:1] for v in l.split(', ')[1:]}
+    maxX=(max(points[key][0] for key in points))
+    maxY=(max(points[key][1] for key in points))
+    return points,maxX,maxY
 
 def manhatten(x,y,*points):
     grid=np.zeros((x,y),dtype=int)
@@ -19,4 +15,4 @@ def manhatten(x,y,*points):
 if __name__=="__main__":
 
     coordinates=getPuzzleinput(6)
-    X,Y=borders(coordinates)
+    points,x,y=borders(coordinates)
