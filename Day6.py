@@ -8,7 +8,13 @@ def borders(coordinates):
     maxY=(max(points[key][1] for key in points))
     return points,maxX,maxY
 
+def distance(x1,y1,x2,y2):
+
+    d=abs(x1-x2)+abs(y1-y2)
+    return d
+
 def manhatten(x,y,points):
+
     grid=np.zeros((x,y),dtype=int)
     for i,(v,s) in points.items():
         grid[v-1][s-1]=i+1000
@@ -19,7 +25,7 @@ def manhatten(x,y,points):
             a = np.nditer(grid, flags=['multi_index'], op_flags=['readwrite'])
             for k in a:
                 print(a[0], a.multi_index)
-                print(type(a.multi_index))
+                #print(type(a.multi_index))
                 try:
                     a.__next__()
                 except:
