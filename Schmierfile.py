@@ -29,11 +29,11 @@ stinglist =['zihrtxgmwcfpbunoleydukjmqv','zihrtxgmwcfpbunoleydukjmqk']
 # print (theString.rpartition('buno')[2])
 
 #[int(s) for s in str.split() if s.isdigit()]#
-
-test1=[1,2,3,5,6,7,8,9]
-test2=[7,8,9]
-for i in test1 for k in test2:
-    print (i,j)
+#
+# test1=[1,2,3,5,6,7,8,9]
+# test2=[7,8,9]
+# for i in test1 for k in test2:
+#     print (i,j)
 
 
 # X = np.zeros((100, 200, 300))

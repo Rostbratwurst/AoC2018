@@ -20,6 +20,24 @@ def distance(p1,p2):
     d=abs(p1[0]-p2[0])+abs(p1[1]-p2[1])
     return d
 
+def points1000(grid,points):
+    dist = np.zeros((len(grid), 1))
+    gridndist = np.concatenate((grid, dist), axis=1)
+    for i in range(len(gridndist)):
+        d=0
+        for p in points:
+            d += distance((gridndist[i][0], gridndist[i][1]),points[p])
+            if d > 10000:
+                gridndist[i][2]=-1
+                break
+            else:
+                pass
+        if gridndist[i][2]!=-1:
+            gridndist[i][2] = 2
+
+    res=np.count_nonzero(gridndist[:,2]==2)
+    return gridndist,res
+
 def manhatten(grid,points):
     dist=np.zeros((len(grid),2))
     gridndist=np.concatenate((grid,dist),axis=1)
@@ -53,34 +71,6 @@ def manhatten(grid,points):
     for p in points:
         pointsum.append(np.count_nonzero(gridndist[:,2]==p))
 
-    # grid=np.zeros((x,y),dtype=int)
-    # for i,(v,s) in points.items():
-    #     grid[v-1][s-1]=i+1000
-    #     if i == 0:
-    #         for a in np.nditer(grid, flags=['multi_index'], op_flags=['readwrite']):
-    #             a[...] = i
-    #     else:
-    #         a = np.nditer(grid, flags=['multi_index'], op_flags=['readwrite'])
-    #         for k in a:
-    #             print(a[0], a.multi_index)
-    #             #print(type(a.multi_index))
-    #             try:
-    #                 a.__next__()
-    #             except:
-    #                 break
-
-
-        # elif
-        # a = np.nditer(grid, flags=['multi_index'], op_flags=['readwrite'])
-        #     for i in range(1000000):
-        #         print(a[0],a.multi_index)
-        #         a.__next__()
-        #     if i == 0:
-        #         a[...]=0
-        #     elif abs(l-points[i+1][0])+abs(v-points[i+1][1]):
-        #         a[...]=
-
-
     return gridndist,infinite,pointsum
 
 if __name__=="__main__":
@@ -88,4 +78,5 @@ if __name__=="__main__":
     coordinates=getPuzzleinput(6)
     points,x,y=borders(coordinates)
     grid=meshgrid(x,y)
-    gd,inf,res=manhatten(grid,points)
+    #gd,inf,res=manhatten(grid,points)
+    gd,res=points1000(grid,points)
