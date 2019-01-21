@@ -1,15 +1,15 @@
 import time
 import random
 
-lowerlist = ['abcdefghijklmnopqrstuvwxyz'[:random.randint(0,25)] for x in range(1000)]
+lowerlist = ['abcdefghijklmnopqrstuvwxyz'[:random.randint(0,25)] for x in range(1000000)]
 upperlist = []
 
 start = time.time()
 
-def to_upper_1():
-    for word in lowerlist:
-        upperlist.append(str.upper(word))
-to_upper_1()
+# def to_upper_1():
+#     for word in lowerlist:
+#         upperlist.append(str.upper(word))
+# to_upper_1()
 
 
 #------------------------------------------------
@@ -23,17 +23,17 @@ to_upper_1()
 # def to_upper_3():
 # 	upperlist = []
 # 	upper = str.upper
-# 	append = upperlist.append
+# 	append = upperlist.append()
 #     for word in lowerlist:
 #         append(upper(word))
 #     return upperlist
 #
 # upperlist = to_upper_3()
 
-# upperlist = map(str.upper, lowerlist)
-#
-# lowerlist = ['abcdefghijklmnopqrstuvwxyz'[:random.randint(0,25)] for x in range(1000)]
-# upperlist = [str.upper(x) for x in lowerlist]
+upperlist = map(str.upper, lowerlist)
+
+lowerlist = ['abcdefghijklmnopqrstuvwxyz'[:random.randint(0,25)] for x in range(1000)]
+upperlist = [str.upper(x) for x in lowerlist]
 
 end = time.time()
-print("--- %.50f seconds ---" % (end - start))
+print("{:.5f}s".format(end - start))
