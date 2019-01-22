@@ -6,42 +6,33 @@ def proneInput(Inp):
 
 
 def order(Inp):
+    letter=['abcdefghijklmnopqrstuvwxyz']
     manual=[]
-    app=manual.append
-    ins=manual.insert
-    index=manual.index
 
 
+    it=0
     while Inp:
-        for bef, aft in Inp:
-            index_aft=[i for i, x in enumerate(manual) if aft in x]
-            index_bef=[i for i, x in enumerate(manual) if bef in x]
-            if len(index_bef)>1 or len(index_aft)>1:
-                print('------------------FEHLER-----------------------')
-                break
 
-            if not manual:                                                  #would fail if empty lists in list
-                app([bef])
-                app([aft])
+        if it==0:
+            manual.append(Inp[0][0])
+            stage = Inp[0][1]
+            del Inp[0]
 
-            elif index_aft and not index_bef:
-                try:
-                    manual[index_aft[0]-1].append(bef)
-                except IndexError:
-                    manual.insert(index_aft[0],[bef])
-                except:
-                    print("Something else went wrong")
+        nexts = []
+        dellist=[]
+        for ind, befaft in enumerate(Inp):
+            if befaft[0] == stage or  befaft[0] in stage:
+                nexts.append(befaft[1])
+                dellist.append(ind)
+        manual.extend(sorted(nexts))
+        stage=nexts
+        for n in sorted(dellist,reverse=True):
+            del(Inp[n])
 
-            elif index_bef and not index_aft:
-                try:
-                    manual[index_bef[0]+1].append(aft)
-                except IndexError:
-                    manual.insert(index_bef[0]+1,[aft])
-                except:
-                    print("Something else went wrong")
-            Inp.remove((bef,aft))
+        it += 1
 
-    manual=[sorted(s) for i,s in enumerate(manual)]
+
+
     return manual
 
 
