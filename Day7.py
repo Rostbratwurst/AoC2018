@@ -18,29 +18,60 @@ def presort(Inp):
 def work(Inp):
     manual=[]
 #------------------------start poin and queue------------------------------------
-    start=[i for i in Inp.keys() if not any(i in x for x in Inp.values())]
+    start=[(i,ord(i)-64) for i in Inp.keys() if not any(i in x for x in Inp.values())]
     start.sort()
-    startval=start[0]
-    queue=start[1:]
+    # startval=start[0]
+    # queue=start[1:]
 #---------------------------working----------------------------------------------
     InpCop = dict(Inp)
-
+    InProgress=set(start)
+    t=0
+    queue=[]
     while InpCop or queue:
-        manual.append(startval)
-        try:
-            queue.extend(InpCop[startval])
-            del InpCop[startval]
-        except KeyError:
-            pass
-        queue=sorted(set(queue))
-        queue=[x for x in queue if x not in manual]
-        Task=[x for x in queue if not any(x in i for i in InpCop.values()) ]
-        try:
-            startval=sorted(Task)[0]
-        except IndexError:
-            pass
+        for elem in InProgress:
+            if elem[1]==0:
+                manual.append(elem[0])
+                queue.extend(InpCop[elem[0]])
+                InpCop.pop(elem[0])
+        queue = sorted(set(queue))
+        queue = [x for x in queue if x not in (manual and InProgress)]
+        InProgress=set(x for x in InProgress if x[1]>0)
+        InProgress=set((x,y-1) for x,y in InProgress)
+        #InProgress=set([x for x in InProgress if x not in manual])
+        # try:
+        #     queue.extend(InpCop[startval])
+        #     del InpCop[startval]
+        # except KeyError:
+        #     pass
+        # queue=sorted(set(queue))
+        # queue=[x for x in queue if x not in manual]
+        Tasks=[(x,ord(x)-64)for x in queue if not any(x in i for i in InpCop.values())]
+        queue=[x for x in queue if not any(x in i for i in Tasks)]
 
-    return ''.join(manual)
+        n=0
+        while len(InProgress)<5 and Tasks:
+            try:
+                InProgress.update([Tasks[n]])
+            except IndexError:
+                break
+            n+=1
+
+
+
+
+        # try:
+        #     startval=sorted(Task)[0]
+        # except IndexError:
+        #     pass
+        t+=1
+
+    return ''.join(manual),t
+
+
+
+
+
+
 
 
 
@@ -49,7 +80,7 @@ if __name__=="__main__":
     Inp=getPuzzleinput(7)
     pronedInp=proneInput(Inp)
     res=presort(pronedInp)
-    man=work(res)
+    man,duration=work(res)
 
 #-------------------------shorter Internet Solution------------------------------
 # from collections import defaultdict, deque
