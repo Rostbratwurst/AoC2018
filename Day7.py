@@ -29,10 +29,19 @@ def work(Inp):
     Order = Inp.copy()
     t=0
 
-    while Order or Q:
+    while Order or Q or P:
 
         if t ==0:
             P.extend(start)
+
+        if len(P)<6 and Q:
+            for i in Q:
+                if not any(i in x for x in Order.values()):
+                    P.append([i,ord(i)+60-64])
+                    print('Begin ',i,t)
+                    Q=[k for k in Q if k != i]
+                    if len(P)>=5:
+                        break
 
         for k in P:
             k[1]-=1
@@ -48,14 +57,7 @@ def work(Inp):
 
         #t += 1
 
-        if len(P)<6 and Q:
-            for i in Q:
-                if not any(i in x for x in Order.values()):
-                    P.append([i,ord(i)+61-64])
-                    print('Begin ',i,t)
-                    Q=[k for k in Q if k != i]
-                    if len(P)>=5:
-                        break
+
 
         t+=1
 
