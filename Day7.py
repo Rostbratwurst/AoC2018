@@ -45,7 +45,7 @@ def work(Inp):
         #     pass
         # queue=sorted(set(queue))
         # queue=[x for x in queue if x not in manual]
-        Tasks=[(x,ord(x)+61-64)for x in queue if not any(x in i for i in InpCop.values())]
+        Tasks=[(x,ord(x)-64)for x in queue if not any(x in i for i in InpCop.values())]
         queue=[x for x in queue if not any(x in i for i in Tasks)]
 
         n=0
